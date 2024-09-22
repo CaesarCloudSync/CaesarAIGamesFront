@@ -5,7 +5,7 @@ export default function Header({gamewasadded,setGameWasDownloaded}:any){
     const [url,setURL] = useState("");
     const addgamedownload  = async () =>{
         if (url !== "" && url.includes("https")){
-            const response = await axios.post(`http://raspberrypi.local:8080/api/v1/downloadgame`,{"url":url});
+            const response = await axios.post(`http://192.168.1.11:8080/api/v1/downloadgame`,{"url":url});
             let result = response.data
             let task_id = result.task_id
             let filename = result.filename
@@ -18,7 +18,7 @@ export default function Header({gamewasadded,setGameWasDownloaded}:any){
                     const new_pending_download = pendingdownload.filter((obj:any)=> obj.filename !== filename);
                     const old_task_id = pendingdownload.filter((obj:any)=> obj.filename === filename)[0].task_id;
                     //console.log("new_task_id",old_task_id)
-                    const response = await axios.get(`http://raspberrypi.local:8080/cancel_task?task_id=${old_task_id}`)
+                    const response = await axios.get(`http://192.168.1.11:8080/cancel_task?task_id=${old_task_id}`)
                     let result = response.data
                     //console.log(result)
                     if ("message" in result){

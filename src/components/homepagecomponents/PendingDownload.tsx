@@ -3,14 +3,14 @@ import { useEffect, useState } from "react"
 export default function PendingDownload({filename,task_id,gamewasadded,setGameWasDownloaded}:any){
     const [progress,setProgress] = useState("");
     const getprogress =async () => {
-        const response = await axios.post("http://raspberrypi.local:8080/tasks",{"task_id":task_id,"filename":filename})
+        const response = await axios.post("http://192.168.1.11:8080/tasks",{"task_id":task_id,"filename":filename})
         let result = response.data
         let progress = result.progress
         //console.log(progress,"hello")
         setProgress(progress)
     }
     const canceltask =async () => {
-        const response = await axios.get(`http://raspberrypi.local:8080/cancel_task?task_id=${task_id}`)
+        const response = await axios.get(`http://192.168.1.11:8080/cancel_task?task_id=${task_id}`)
         let result = response.data
         if ("message" in result){
             let window_use:any = window

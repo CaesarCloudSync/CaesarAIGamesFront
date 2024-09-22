@@ -1,1 +1,1 @@
-npm run package -- --arch="x64"
+npm run make -- --arch="x64"
